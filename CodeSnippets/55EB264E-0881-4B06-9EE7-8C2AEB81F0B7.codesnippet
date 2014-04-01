@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>jw_gcd_parallel_exec</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+        // 并行执行的线程一
+    });
+    dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+        // 并行执行的线程二
+    });
+    dispatch_group_notify(group, dispatch_get_global_queue(0,0), ^{
+        // 汇总结果
+    });</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>55EB264E-0881-4B06-9EE7-8C2AEB81F0B7</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>GCD:并且执行再汇总</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

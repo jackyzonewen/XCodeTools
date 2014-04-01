@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>jw_notificationcenter</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(&lt;#methodName#&gt;) name:kLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // post notification
+    NSDictionary * userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:200] forKey:@"code"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:&lt;#notification_name#&gt; object:self userInfo:userInfo];
+    
+    - (void)&lt;#functionname#&gt;:(NSNotification*)notification</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>B892B389-C59A-4D11-BFBF-0998B94DB3B3</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>通知中心</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
