@@ -3,25 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>jw_gcd_after</string>
+	<string>jw_kvo_set_property</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeBlock</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>// 延迟2秒执行：
-double delayInSeconds = 2.0;
-dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    // code to be executed on the main queue after delay
-});
-</string>
+	<string>- (void)set&lt;#property#&gt; {
+    if (_&lt;#iVar#&gt; != &lt;#newVaule#&gt;) {
+        [self willChangeValueForKey:@keypath(self, &lt;#property#&gt;)];
+        _&lt;#iVar#&gt; = &lt;#newVaule#&gt;;
+        [self didChangeValueForKey:@keypath(self, &lt;#property#&gt;)];
+    }
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>214404BF-94AA-4767-9269-87C09461ED9D</string>
+	<string>581D5DDC-1A6A-4A13-A9E3-509BDB673E3A</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>GCD - 延后执行</string>
+	<string>KVO - 设置属性(手动发送通知)</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

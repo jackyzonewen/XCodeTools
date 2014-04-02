@@ -3,25 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>jw_gcd_after</string>
+	<string>jw_option</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeBlock</string>
+		<string>TopLevel</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>// 延迟2秒执行：
-double delayInSeconds = 2.0;
-dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    // code to be executed on the main queue after delay
-});
-</string>
+	<string>typedef NS_OPTIONS(&lt;#type#&gt;, &lt;#name#&gt;) {
+    &lt;#v0#&gt; = 0,
+    &lt;#v1#&gt; = 1 &lt;&lt; 0,
+};</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>214404BF-94AA-4767-9269-87C09461ED9D</string>
+	<string>6E4B2608-475E-427E-A7AE-483F0E410C19</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>GCD - 延后执行</string>
+	<string>Typedef - Option</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

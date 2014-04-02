@@ -3,25 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>jw_gcd_after</string>
+	<string>jw_kvo_auto_notify</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
-		<string>CodeBlock</string>
+		<string>ClassImplementation</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>// 延迟2秒执行：
-double delayInSeconds = 2.0;
-dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    // code to be executed on the main queue after delay
-});
-</string>
+	<string>+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
+{
+    if ([key isEqualToString:@"isFinished"]) {
+        return YES;
+    }
+    
+    return [super automaticallyNotifiesObserversForKey:key];
+}</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>214404BF-94AA-4767-9269-87C09461ED9D</string>
+	<string>37CC788A-365A-4672-ADF5-36F5A444557E</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>GCD - 延后执行</string>
+	<string>KVO - 自动发送通知</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
