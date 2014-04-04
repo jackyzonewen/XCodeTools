@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>jw_common_macro</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//
+//  CommonMacro.h
+//  DsKtvOrder
+//
+//  Created by xujunwen on 13-11-12.
+//  Copyright (c) 2013年 福建星网视易信息系统有限公司. All rights reserved.
+//
+
+#ifndef DsKtvOrder_CommonMacro_h
+#define DsKtvOrder_CommonMacro_h
+
+/*
+#import &lt;CoreTelephony/CTTelephonyNetworkInfo.h&gt;
+#import &lt;CoreTelephony/CTCarrier.h&gt;
+*/
+
+//常用的IOS开发宏
+
+/******************************************************************************/
+#pragma mark - Frame (宏 x, y, width, height)
+
+// 应用程序Frame
+#define App_Frame               [[UIScreen mainScreen] applicationFrame]
+#define App_Frame_Height        [[UIScreen mainScreen] applicationFrame].size.height
+#define App_Frame_Width         [[UIScreen mainScreen] applicationFrame].size.width
+
+// 屏幕Height&amp;Width
+#define Main_Screen_Height      [[UIScreen mainScreen] bounds].size.height //屏幕宽度
+#define Main_Screen_Width       [[UIScreen mainScreen] bounds].size.width  //屏幕高度
+
+// View 坐标(x,y)和宽高(width,height)
+#define X(v)                    (v).frame.origin.x
+#define Y(v)                    (v).frame.origin.y
+#define WIDTH(v)                (v).frame.size.width
+#define HEIGHT(v)               (v).frame.size.height
+
+#define MinX(v)                 CGRectGetMinX((v).frame)
+#define MinY(v)                 CGRectGetMinY((v).frame)
+
+#define MidX(v)                 CGRectGetMidX((v).frame)
+#define MidY(v)                 CGRectGetMidY((v).frame)
+
+#define MaxX(v)                 CGRectGetMaxX((v).frame)
+#define MaxY(v)                 CGRectGetMaxY((v).frame)
+
+// 系统控件默认高度
+#define kStatusBarHeight        (20.f)
+#define kTopBarHeight           (44.f)
+#define kBottomBarHeight        (49.f)
+#define kCellDefaultHeight      (44.f)
+#define kEnglishKeyboardHeight  (216.f)
+#define kChineseKeyboardHeight  (252.f)
+
+
+/******************************************************************************/
+#pragma mark - Funtion Method (宏 方法)
+
+// 颜色(RGB)
+#define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+#define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define HEXRGBCOLOR(rgbValue)   [UIColor colorWithRed:((float)((rgbValue &amp; 0xFF0000) &gt;&gt; 16))/255.0 \
+                                                green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 \
+                                                 blue:((float)(rgbValue &amp; 0xFF))/255.0 \
+                                                alpha:1.0]
+
+// 字体大小(常规/粗体)
+#define BOLDSYSTEMFONT(FONTSIZE)[UIFont boldSystemFontOfSize:FONTSIZE]
+#define SYSTEMFONT(FONTSIZE)    [UIFont systemFontOfSize:FONTSIZE]
+#define FONT(NAME, FONTSIZE)    [UIFont fontWithName:(NAME) size:(FONTSIZE)]
+
+// View 圆角和加边框
+#define ViewBorderRadius(View, Radius, Width, Color)\
+                                \
+                                [View.layer setCornerRadius:(Radius)];\
+                                [View.layer setMasksToBounds:YES];\
+                                [View.layer setBorderWidth:(Width)];\
+                                [View.layer setBorderColor:[Color CGColor]]
+
+// View 圆角
+#define ViewRadius(View, Radius)\
+                                \
+                                [View.layer setCornerRadius:(Radius)];\
+                                [View.layer setMasksToBounds:YES]
+
+
+// 当前语言
+#define CURRENTLANGUAGE         ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+// UIView - viewWithTag
+#define VIEWWITHTAG(_OBJECT, _TAG)\
+                                \
+                                [_OBJECT viewWithTag : _TAG]
+
+// 本地化字符串
+/** NSLocalizedString宏做的其实就是在当前bundle中查找资源文件名“Localizable.strings”(参数:键＋注释) */
+#define LocalString(x, ...)     NSLocalizedString(x, nil)
+/** NSLocalizedStringFromTable宏做的其实就是在当前bundle中查找资源文件名“xxx.strings”(参数:键＋文件名＋注释) */
+#define AppLocalString(x, ...)  NSLocalizedStringFromTable(x, @"someName", nil)
+
+//当前系统设置国家的country iso code
+#define countryISO  [[NSLocale currentLocale] objectForKey: NSLocaleCountryCode]
+//当前系统设置语言的iso code
+#define languageISO [[NSLocale currentLocale] objectForKey: NSLocaleLanguageCode]
+
+/*
+static NSString *(^CountryNameByISO)(NSString *) = ^(NSString *iso) {
+    NSLocale *locale = [NSLocale currentLocale];
+    return [locale displayNameForKey:NSLocaleCountryCode value:iso];
+};
+
+static NSString *(^ISOCountryCodeByCarrier)() = ^() {
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+    return [carrier isoCountryCode];
+};
+*/
+
+#define SIMISO                  ISOCountryCodeByCarrier()
+#define CountryNameFromISO(iso) CountryNameByISO(iso)
+
+#define USER_DEFAULT            [NSUserDefaults standardUserDefaults]  //UserDefault
+#define degreesToRadian(x)      (M_PI * (x) / 180.0) //弧度转角度
+#define radianToDegrees(radian) (radian*180.0)/(M_PI)  //角度转弧度
+
+
+/* ****************************************************************************************************************** */
+#pragma mark - 系统 部分
+
+#define IOS_VERSION                                 [[[UIDevice currentDevice] systemVersion] floatValue]   //当前设备的系统版本
+#define CurrentSystemVersion                        ([[UIDevice currentDevice] systemVersion])              //当前的系统版本
+#define IS_IOS6()                                   [[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 6.0
+
+// 是否Retina屏
+#define isRetina                                    ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? \
+                                                    CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+#define isRetina2                                   ([[UIScreen mainScreen] scale]== 2 ? YES : NO)
+
+// 是否iPhone5
+#define isiPhone5                                   ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? \
+                                                    CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+// 是否iPad
+#define isPad                                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+// 版本比较
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+/*
+ Usage sample:
+ 
+ if (SYSTEM_VERSION_LESS_THAN(@"4.0")) {
+ ...
+ }
+ 
+ if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"3.1.1")) {
+ ...
+ }
+ */
+
+
+#pragma mark - Block
+
+#define BACK(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+#define MAIN(block) dispatch_async(dispatch_get_main_queue(),block)
+
+#pragma mark - 加载图片Image
+
+// 资源路径
+#define PNGPATH(NAME)           [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:NAME] ofType:@"png"]
+#define JPGPATH(NAME)           [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:NAME] ofType:@"jpg"]
+#define PATH(NAME, EXT)         [[NSBundle mainBundle] pathForResource:(NAME) ofType:(EXT)]
+
+// 加载图片
+#define PNG_DISK_IMAGE(NAME)    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:@"png"]]
+#define JPG_DISK_IMAGE(NAME)    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:@"jpg"]]
+#define DISK_IMAGE(NAME, EXT)   [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:(NAME) ofType:(EXT)]]
+#define CACHE_IMAGE(name) [UIImage imageNamed:name]
+
+#pragma mark - 沙盒路径
+
+#define PATH_OF_APP_HOME        NSHomeDirectory()
+#define PATH_OF_TEMP            NSTemporaryDirectory()
+#define PATH_OF_DOCUMENT        [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#define PATH_OF_DOCUMENT2       [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
+#define PATH_OF_LIBRARY         [NSHomeDirectory() stringByAppendingPathComponent:@"Library"]
+#define PATH_OF_CACHE           [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"]
+
+#define PATH_OF_MAINBOUND       [[NSBundle mainBundle] bundlePath]
+#define PATH_OF_Resource        [[NSBundle mainBundle] resourcePath]
+#define PATH_OF_Executable      [[NSBundle mainBundle] executablePath]
+
+
+#pragma mark - 单例
+
+#define DeclareSingletonInterface(className)  \
++ (classname *)shared##classname
+
+#define ImplementSingletonInterface(className) \
++ (classname *)shared##classname { \
+        static dispatch_once_t onceToken = 0; \
+        static id sharedInstance = nil; \
+        dispatch_once(&amp;onceToken, ^{ \
+        sharedInstance = [[self alloc] init]; \
+    }); \
+    return sharedInstance; \
+}
+
+#pragma mark - 功能部分
+// Debug模式打印日志
+#ifdef DEBUG
+    #define DLOG_METHOD NSLog(@"%s", __func__)
+    #define DLOG_CMETHOD NSLog(@"%@/%@", NSStringFromClass([self class]), NSStringFromSelector(_cmd))
+    #define DCOUNT(p) NSLog(@"%s(%d): rcount = %d\n", __func__, __LINE__, [p retainCount]);
+    #define DLOG_TRACE(x) do {printf x; putchar('\n'); fflush(stdout);} while (0)
+    #define DLog( s, ... ) NSLog( @"&lt;%p %@:(%d)&gt; | %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
+    #define DLogRect(rect) DLog(@"%s (x=%f, y=%f, w=%f, h=%f)", #rect, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)
+#else
+    #define DLOG_METHOD
+    #define DLOG_CMETHOD
+    #define DCOUNT(p)
+    #define DLOG_TRACE(x)
+    #define DLog( s, ... )
+    #define DLogRect(rect)
+#endif
+
+// 真机测试保存日志到文件
+/*
+- (void)redirectNSLogToDocumentFolder{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
+    NSString *logFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+}
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+    // 真机测试时保存日志
+    if ([CDeviceInfo getModelType] != SIMULATOR) {
+        [self redirectNSLogToDocumentFolder];
+    }
+}
+*/
+
+//针对真机iPhone
+#if TARGET_OS_IPHONE
+//iPhone Device
+#endif
+
+//针对模拟器
+#if TARGET_IPHONE_SIMULATOR
+//iPhone Simulator
+#endif
+
+//ARC
+#if __has_feature(objc_arc)
+//compiling with ARC
+#define SAFE_RELEASE(x) x = nil
+#else
+// compiling without ARC
+#define SAFE_RELEASE(x) [x release];x=nil
+#endif
+
+#endif
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>60A2D481-104A-4B5A-B89F-9FE0428F18A9</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C-Plus-Plus</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>CommonMacro.h</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

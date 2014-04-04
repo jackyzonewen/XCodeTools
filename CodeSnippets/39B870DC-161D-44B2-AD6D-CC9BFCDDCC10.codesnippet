@@ -2,29 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>jw_block_solve_recycle_retain</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>CodeBlock</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>    __weak id weakSelf = self;
-    aBlock = ^(){
-        id strongSelf = weakSelf;
-        if (strongSelf != nil) {
-            // do stuff with strongSelf
-        }
-    };</string>
+	<string>    /*
+     * 判断这个Timer不为nil则停止并释放
+     * 如果不先停止可能会导致crash
+     */
+    #define WVSAFA_DELETE_TIMER(timer) { \
+    if (timer != nil) { \
+        [timer invalidate]; \
+        [timer release]; \
+        timer = nil; \
+    } \</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>4C7C9D8B-C9DA-4D98-A3C7-E58324ACA9C9</string>
+	<string>39B870DC-161D-44B2-AD6D-CC9BFCDDCC10</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Block - 回环解决</string>
+	<string>定时器 - 关闭</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>2</integer>
+	<integer>0</integer>
 </dict>
 </plist>

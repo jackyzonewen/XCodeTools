@@ -16,13 +16,14 @@
                                                   userInfo:nil
                                                    repeats:YES];
     // 取消
-    [self.&lt;#var#&gt; invalidate];</string>
+    [self.&lt;#var#&gt; invalidate];
+</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>E797009D-A6A7-424B-9546-C30231B0E4D7</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>定时器</string>
+	<string>定时器 - 开启</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
