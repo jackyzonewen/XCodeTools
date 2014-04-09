@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//1 info.plist中Supported interface orientations中加入所有方向的支持
+//2 AppDelegate中加入方法 -(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{ return UIInterfaceOrientationMaskAll;} iOS6中为了后续支持任何方向的旋转
+//3 任何你想控制旋转的界面中加入方法
+
+// iOS6.0
+-(NSUInteger)supportedInterfaceOrientations{
+    
+    return UIInterfaceOrientationMaskPortrait; // 可以修改为任何方向
+}
+
+-(BOOL)shouldAutorotate{
+    
+    return YES;
+}
+
+// iOS5.0
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    
+    return (toInterfaceOrientation == UIInterfaceOrientationPortrait); // 可以修改为任何方向
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8B45E0B9-F061-4709-8C86-FCDAB7B07DEB</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>横竖屏 - 支持</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
