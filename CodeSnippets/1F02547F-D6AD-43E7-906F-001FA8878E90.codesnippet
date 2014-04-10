@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>jw_view_initialize_setup</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>-(void) setup {
+    // initialize work
+}
+
+-(id) initWithFrame:(CGRect)frame {
+    
+    if((self = [super initWithFrame:frame])) {
+        
+        [self setup];
+    }
+    
+    return self;
+}
+-(id) initWithCoder:(NSCoder *)aDecoder {
+    
+    if((self = [super initWithCoder:aDecoder])) {
+        
+        [self setup];
+    }
+    
+    return self;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>1F02547F-D6AD-43E7-906F-001FA8878E90</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>视图通用初始化</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>
