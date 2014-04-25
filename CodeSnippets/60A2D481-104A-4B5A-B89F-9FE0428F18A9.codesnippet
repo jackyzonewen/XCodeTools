@@ -21,9 +21,10 @@
 #define DsKtvOrder_CommonMacro_h
 
 /*
-#import &lt;CoreTelephony/CTTelephonyNetworkInfo.h&gt;
-#import &lt;CoreTelephony/CTCarrier.h&gt;
-*/
+ #import &lt;CoreTelephony/CTTelephonyNetworkInfo.h&gt;
+ #import &lt;CoreTelephony/CTCarrier.h&gt;
+ */
+//#import "BBLogging.h"
 
 //常用的IOS开发宏
 
@@ -70,9 +71,9 @@
 #define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 #define HEXRGBCOLOR(rgbValue)   [UIColor colorWithRed:((float)((rgbValue &amp; 0xFF0000) &gt;&gt; 16))/255.0 \
-                                                green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 \
-                                                 blue:((float)(rgbValue &amp; 0xFF))/255.0 \
-                                                alpha:1.0]
+green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 \
+blue:((float)(rgbValue &amp; 0xFF))/255.0 \
+alpha:1.0]
 
 // 字体大小(常规/粗体)
 #define BOLDSYSTEMFONT(FONTSIZE)[UIFont boldSystemFontOfSize:FONTSIZE]
@@ -81,17 +82,17 @@
 
 // View 圆角和加边框
 #define ViewBorderRadius(View, Radius, Width, Color)\
-                                \
-                                [View.layer setCornerRadius:(Radius)];\
-                                [View.layer setMasksToBounds:YES];\
-                                [View.layer setBorderWidth:(Width)];\
-                                [View.layer setBorderColor:[Color CGColor]]
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES];\
+[View.layer setBorderWidth:(Width)];\
+[View.layer setBorderColor:[Color CGColor]]
 
 // View 圆角
 #define ViewRadius(View, Radius)\
-                                \
-                                [View.layer setCornerRadius:(Radius)];\
-                                [View.layer setMasksToBounds:YES]
+\
+[View.layer setCornerRadius:(Radius)];\
+[View.layer setMasksToBounds:YES]
 
 
 // 当前语言
@@ -99,8 +100,8 @@
 
 // UIView - viewWithTag
 #define VIEWWITHTAG(_OBJECT, _TAG)\
-                                \
-                                [_OBJECT viewWithTag : _TAG]
+\
+[_OBJECT viewWithTag : _TAG]
 
 // 本地化字符串
 /** NSLocalizedString宏做的其实就是在当前bundle中查找资源文件名“Localizable.strings”(参数:键＋注释) */
@@ -114,17 +115,17 @@
 #define languageISO [[NSLocale currentLocale] objectForKey: NSLocaleLanguageCode]
 
 /*
-static NSString *(^CountryNameByISO)(NSString *) = ^(NSString *iso) {
-    NSLocale *locale = [NSLocale currentLocale];
-    return [locale displayNameForKey:NSLocaleCountryCode value:iso];
-};
-
-static NSString *(^ISOCountryCodeByCarrier)() = ^() {
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    return [carrier isoCountryCode];
-};
-*/
+ static NSString *(^CountryNameByISO)(NSString *) = ^(NSString *iso) {
+ NSLocale *locale = [NSLocale currentLocale];
+ return [locale displayNameForKey:NSLocaleCountryCode value:iso];
+ };
+ 
+ static NSString *(^ISOCountryCodeByCarrier)() = ^() {
+ CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+ CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+ return [carrier isoCountryCode];
+ };
+ */
 
 #define SIMISO                  ISOCountryCodeByCarrier()
 #define CountryNameFromISO(iso) CountryNameByISO(iso)
@@ -143,12 +144,12 @@ static NSString *(^ISOCountryCodeByCarrier)() = ^() {
 
 // 是否Retina屏
 #define isRetina                                    ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? \
-                                                    CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
 #define isRetina2                                   ([[UIScreen mainScreen] scale]== 2 ? YES : NO)
 
 // 是否iPhone5
 #define isiPhone5                                   ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? \
-                                                    CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 // 是否iPad
 #define isPad                                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -211,49 +212,133 @@ static NSString *(^ISOCountryCodeByCarrier)() = ^() {
 
 #define ImplementSingletonInterface(className) \
 + (classname *)shared##classname { \
-        static dispatch_once_t onceToken = 0; \
-        static id sharedInstance = nil; \
-        dispatch_once(&amp;onceToken, ^{ \
-        sharedInstance = [[self alloc] init]; \
-    }); \
-    return sharedInstance; \
+static dispatch_once_t onceToken = 0; \
+static id sharedInstance = nil; \
+dispatch_once(&amp;onceToken, ^{ \
+sharedInstance = [[self alloc] init]; \
+}); \
+return sharedInstance; \
 }
 
 #pragma mark - 功能部分
-// Debug模式打印日志
+
+
+/**
+ * Debug模式打印日志
+ * 使用说明：
+ * 例如：EvLogI(%@, @"我是测试信息");
+ * 通过下关开关来决定是否关闭某一类别的日志，默认根据是否是Debug模式来启用日志
+ * 通过EvLOG_ENABLED总开关来决定是否打印日志
+ */
+
+// 是否开启日志开关
 #ifdef DEBUG
-    #define DLOG_METHOD NSLog(@"%s", __func__)
-    #define DLOG_CMETHOD NSLog(@"%@/%@", NSStringFromClass([self class]), NSStringFromSelector(_cmd))
-    #define DCOUNT(p) NSLog(@"%s(%d): rcount = %d\n", __func__, __LINE__, [p retainCount]);
-    #define DLOG_TRACE(x) do {printf x; putchar('\n'); fflush(stdout);} while (0)
-    #define DLog( s, ... ) NSLog( @"&lt;%p %@:(%d)&gt; | %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
-    #define DLogRect(rect) DLog(@"%s (x=%f, y=%f, w=%f, h=%f)", #rect, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)
+#   define EvLOG_ENABLED        1
 #else
-    #define DLOG_METHOD
-    #define DLOG_CMETHOD
-    #define DCOUNT(p)
-    #define DLOG_TRACE(x)
-    #define DLog( s, ... )
-    #define DLogRect(rect)
+#   define EvLOG_ENABLED        0
 #endif
+
+// 日志级别开关
+#ifndef EvLOG_LEVEL_VERBOSE
+#	define EvLOG_LEVEL_VERBOSE  1
+#endif
+#ifndef EvLOG_LEVEL_DEBUG
+#	define EvLOG_LEVEL_DEBUG    1
+#endif
+#ifndef EvLOG_LEVEL_INFO
+#   define EvLOG_LEVEL_INFO		1
+#endif
+#ifndef EvLOG_LEVEL_WARNING
+#   define EvLOG_LEVEL_WARNING  1
+#endif
+#ifndef EvLOG_LEVEL_ERROR
+#   define EvLOG_LEVEL_ERROR    1
+#endif
+
+
+// 是否包含文件说明
+#ifndef EvLOG_INCLUDE_CODE_LOCATION
+#   define EvLOG_INCLUDE_CODE_LOCATION	1
+#endif
+
+// 日志格式
+#define EvLOG_FORMAT_WITH_LOCATION(fmt, lvl, ...) \
+NSLog((@"&lt;%p&gt; %@(Line %d) [%@] " fmt), self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, lvl, ##__VA_ARGS__)
+//NSLog((@"&lt;%p&gt; %@ %s(Line %d) [%@] " fmt), self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __PRETTY_FUNCTION__, __LINE__, lvl, ##__VA_ARGS__)
+#define EvLOG_FORMAT_NO_LOCATION(fmt, lvl, ...) \
+NSLog((@"[%@] " fmt), lvl, ##__VA_ARGS__)
+
+#if defined(EvLOG_INCLUDE_CODE_LOCATION) &amp;&amp; EvLOG_INCLUDE_CODE_LOCATION
+#   define EvLOG_FORMAT(fmt, lvl, ...) EvLOG_FORMAT_WITH_LOCATION(fmt, lvl, ##__VA_ARGS__)
+#else
+#   define EvLOG_FORMAT(fmt, lvl, ...) EvLOG_FORMAT_NO_LOCATION(fmt, lvl, ##__VA_ARGS__)
+#endif
+
+#if !(defined(EvLOG_ENABLED) &amp;&amp; EvLOG_ENABLED)
+#   undef EvLOG_LEVEL_VERBOSE
+#   undef EvLOG_LEVEL_DEBUG
+#   undef EvLOG_LEVEL_INFO
+#   undef EvLOG_LEVEL_WARNING
+#   undef EvLOG_LEVEL_ERROR
+#endif
+
+// VERBOSE级别日志
+#if defined(EvLOG_LEVEL_VERBOSE) &amp;&amp; EvLOG_LEVEL_VERBOSE
+#   define EvLogV(fmt, ...) EvLOG_FORMAT(fmt, @"V", ##__VA_ARGS__)
+#else
+#   define EvLogV(...)
+#endif
+
+// Debug级别日志
+#if defined(EvLOG_LEVEL_DEBUG) &amp;&amp; EvLOG_LEVEL_DEBUG
+#   define EvLogD(fmt, ...) EvLOG_FORMAT(fmt, @"D", ##__VA_ARGS__)
+#else
+#   define EvLogD(...)
+#endif
+
+// Info级别日志
+#if defined(EvLOG_LEVEL_INFO) &amp;&amp; EvLOG_LEVEL_INFO
+#   define EvLogI(fmt, ...) EvLOG_FORMAT(fmt, @"I", ##__VA_ARGS__)
+#else
+#   define EvLogI(...)
+#endif
+
+// WARNING级别日志
+#if defined(EvLOG_LEVEL_WARNING) &amp;&amp; EvLOG_LEVEL_WARNING
+#   define EvLogW(fmt, ...) EvLOG_FORMAT(fmt, @"W", ##__VA_ARGS__)
+#else
+#   define EvLogW(...)
+#endif
+
+// Error级别日志
+#if defined(EvLOG_LEVEL_ERROR) &amp;&amp; EvLOG_LEVEL_ERROR
+#   define EvLogE(fmt, ...) EvLOG_FORMAT(fmt, @"E", ##__VA_ARGS__)
+#   define EvLogEStackTrace(fmt, ...) EvLOG_FORMAT(@"%@", @"E", [NSThread callStackSymbols], ##__VA_ARGS__);
+#else
+#   define EvLogE(...)
+#   define EvLogEStackTrace(...)
+#endif
+
+// 便利日志
+#define EvLogRect(rect)  EvLogV(@"%s [x=%f, y=%f, w=%f, h=%f]", #rect, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)
 
 // 真机测试保存日志到文件
 /*
-- (void)redirectNSLogToDocumentFolder{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
-    NSString *logFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
-    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-}
-
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-    // 真机测试时保存日志
-    if ([CDeviceInfo getModelType] != SIMULATOR) {
-        [self redirectNSLogToDocumentFolder];
-    }
-}
-*/
+ - (void)redirectNSLogToDocumentFolder{
+ NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+ NSString *documentsDirectory = [paths objectAtIndex:0];
+ NSString *fileName =[NSString stringWithFormat:@"%@.log",[NSDate date]];
+ NSString *logFilePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+ freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+ }
+ 
+ - (void)applicationDidFinishLaunching:(UIApplication *)application {
+ // 真机测试时保存日志
+ if ([CDeviceInfo getModelType] != SIMULATOR) {
+ [self redirectNSLogToDocumentFolder];
+ }
+ }
+ */
 
 //针对真机iPhone
 #if TARGET_OS_IPHONE
