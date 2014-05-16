@@ -1,0 +1,36 @@
+{
+  "color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
+  "detect_indentation": false,
+  "ensure_newline_at_eof_on_save": false,
+  "font_face": "Menlo",
+  "font_size": 12,
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "show_full_path": true,
+  "jshint_options":
+  {
+    "boss": true,
+    "browser": false,
+    "eqeqeq": false,
+    "eqnull": true,
+    "evil": true,
+    "laxbreak": true,
+    "newcap": true,
+    "noarg": true,
+    "onecase": true,
+    "onevar": false,
+    "regexdash": true,
+    "strict": false,
+    "sub": true,
+    "trailing": true,
+    "undef": true,
+    "wsh": true
+  },
+  "tab_size": 2,
+  "theme": "Spacegray.sublime-theme",
+  "translate_tabs_to_spaces": true,
+  "trim_trailing_white_space_on_save": true,
+  "use_tab_stops": false
+}
