@@ -3,25 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>jw_block_solve_recycle_retain</string>
+	<string>JW_Remove_Deprecate</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>CodeBlock</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>    __weak typeof(self) weakSelf = self;
-    aBlock = ^(){
-        id strongSelf = weakSelf;
-        if (strongSelf != nil) {
-            // do stuff with strongSelf
-        }
-    };</string>
+	<string>#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+#pragma clang diagnostic pop</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>4C7C9D8B-C9DA-4D98-A3C7-E58324ACA9C9</string>
+	<string>6373F5CD-38EB-43B9-A704-D4261331177F</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Objective-C</string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Block - 回环解决</string>
+	<string>Remove-Deprecated</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
