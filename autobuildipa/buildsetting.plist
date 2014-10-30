@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CODE_SIGN_IDENTITY</key>
+	<string>iPhone Distribution: Fujian Star-net eVideo Information Systems Co.,Ltd. (7VUG34UKAM)</string>
+	<key>PROVISIONING_PROFILE</key>
+	<string>4579bddc-bd60-4bf6-9a79-df11dbc5505b</string>
+	<key>arch</key>
+	<string>armv7</string>
+	<key>configuration</key>
+	<string>Release</string>
+	<key>sdk</key>
+	<string>iphoneos8.0</string>
+	<key>target</key>
+	<string>zhanggui</string>
+	<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+	<string></string>
+</dict>
+</plist>
