@@ -91,7 +91,13 @@ fi
 project_path=$XCODEPROJ_FOLDER_PATH/$TARGET".xcodeproj"
 schemeName=$TARGET
 
-xctool -project $project_path -scheme $schemeName clean
+xctool \
+	-project $project_path \
+	-scheme $schemeName \
+	-configuration $CONFIGURATION \
+	-arch $ARCH \
+	-sdk $SDK \
+	clean
 xctool \
 	-project $project_path \
 	-scheme $schemeName \
