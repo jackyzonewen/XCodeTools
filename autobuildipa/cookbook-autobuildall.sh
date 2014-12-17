@@ -24,14 +24,14 @@ SHELL_DIR=$(cd `dirname $0`; pwd)
 	# 4.修改本文件的STORE_IPA_PATH存储路径
 
 #代码路径（xcodeproj所在的目录）
-SOURCE_CODE_FOLDER="/Users/xujunwen/response/git/iOS/cookbook"
+SOURCE_CODE_FOLDER="/Users/jackyzonewen/Repository/Git/ios/CookBook/"
 
 #xcode编译临时文件的存储路径
-XCODE_BUILD_FOLDER="/Users/xujunwen/Desktop/enterprise/xcodebuildcache"
+XCODE_BUILD_FOLDER="/Users/jackyzonewen/Desktop/enterprise/xcodebuildcache"
 
 #生成ipa的位置
 APP_BUILD_TIME=$(date +%Y%m%d%H%M) #编译时间
-STORE_IPA_PATH="/Users/xujunwen/Desktop/enterprise/cookbook_$APP_BUILD_TIME/cookbook_adhoc.ipa"
+STORE_IPA_PATH="/Users/jackyzonewen/Desktop/enterprise/cookbook_$APP_BUILD_TIME/cookbook_adhoc.ipa"
 
 #自动编译并且打包签名
 COMPILE_IPA_PATH="$SHELL_DIR/cookbook-buildsetting.plist" #编译配置文件

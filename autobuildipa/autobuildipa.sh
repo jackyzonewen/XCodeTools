@@ -22,13 +22,13 @@ BUILDSETTINGFILE="$SHELL_DIR/buildsetting.plist"
 if [ $# -gt 2 ]; then
 	BUILDSETTINGFILE="$3"
 fi
+echo "编译临时文件路径:"$BUILDSETTINGFILE
 
 #如果有编译的路径
 XCODE_BUILD_PATH="../buildtmp" #"$(pwd)/build"
 if [ $# -gt 3 ]; then
 	XCODE_BUILD_PATH="$4"
 fi
-echo "编译临时文件路径:"$BUILDSETTINGFILE
 
 #导出相关函数
 #source $SHELL_DIR/settingfunc/settingmanager.sh
@@ -87,6 +87,11 @@ else
   sudo brew install xctool 
 fi
 
+# build前清除缓存目录
+if [ $XCODE_BUILD_PATH  ] && [ -d $XCODE_BUILD_PATH ]; then
+	rm -rf $XCODE_BUILD_PATH
+fi
+
 project_path=$XCODEPROJ_FOLDER_PATH/$TARGET".xcodeproj"
 schemeName=$TARGET
 
@@ -113,10 +118,6 @@ if [ ! $errorcode -eq 0 ]; then
 	echo "编译失败"
 else
 	echo "编译成功"
-	echo "====="
-	echo $schemeName".app"
-	echo $TARGET".app"
-	echo "====="
 
 	APP_BUILD_PATH=$(find $XCODE_BUILD_PATH -type d -name "*.app")
 	APP_dSYM_PATH=$(find $XCODE_BUILD_PATH -type d -name "*.app.dSYM")
@@ -148,6 +149,11 @@ else
 	fi
 		cp -aR $APP_dSYM_PATH $IPA_dSYM_PATH
 		echo "打包成功"
+
+		# 打包成功清除缓存目录
+		if [ $XCODE_BUILD_PATH  ] && [ -d $XCODE_BUILD_PATH ]; then
+			rm -rf $XCODE_BUILD_PATH
+		fi
 	fi
 fi
 
