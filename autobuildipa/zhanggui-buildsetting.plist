@@ -11,7 +11,7 @@
 	<key>configuration</key>
 	<string>Release</string>
 	<key>sdk</key>
-	<string>iphoneos8.0</string>
+	<string>iphoneos8.1</string>
 	<key>target</key>
 	<string>zhanggui</string>
 	<key>GCC_PREPROCESSOR_DEFINITIONS</key>

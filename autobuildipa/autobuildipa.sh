@@ -22,7 +22,6 @@ BUILDSETTINGFILE="$SHELL_DIR/buildsetting.plist"
 if [ $# -gt 2 ]; then
 	BUILDSETTINGFILE="$3"
 fi
-echo "编译配置文件路径:"$BUILDSETTINGFILE
 
 #如果有编译的路径
 XCODE_BUILD_PATH="../buildtmp" #"$(pwd)/build"
@@ -114,6 +113,11 @@ if [ ! $errorcode -eq 0 ]; then
 	echo "编译失败"
 else
 	echo "编译成功"
+	echo "====="
+	echo $schemeName".app"
+	echo $TARGET".app"
+	echo "====="
+
 	APP_BUILD_PATH=$(find $XCODE_BUILD_PATH -type d -name "*.app")
 	APP_dSYM_PATH=$(find $XCODE_BUILD_PATH -type d -name "*.app.dSYM")
 	IPA_dSYM_PATH=$IPA_PATH".dSYM"

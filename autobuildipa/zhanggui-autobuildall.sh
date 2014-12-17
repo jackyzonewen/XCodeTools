@@ -24,17 +24,17 @@ SHELL_DIR=$(cd `dirname $0`; pwd)
 	# 4.修改本文件的STORE_IPA_PATH存储路径
 
 #代码路径（xcodeproj所在的目录）
-SOURCE_CODE_FOLDER="/Users/jackyzonewen/Repository/SVN/NewManager/IOS/zhanggui"
+SOURCE_CODE_FOLDER="/Users/xujunwen/response/svn/NewMobileManager/IOS/zhanggui"
 
 #xcode编译临时文件的存储路径
-XCODE_BUILD_FOLDER="/Users/jackyzonewen/Desktop/enterprise/xcodebuildcache"
+XCODE_BUILD_FOLDER="/Users/xujunwen/Desktop/enterprise/xcodebuildcache"
 
 #生成ipa的位置
 APP_BUILD_TIME=$(date +%Y%m%d%H%M) #编译时间
-STORE_IPA_PATH="/Users/jackyzonewen/Desktop/enterprise/zhanggui_$APP_BUILD_TIME/zhanggui_adhoc.ipa"
+STORE_IPA_PATH="/Users/xujunwen/Desktop/enterprise/zhanggui_$APP_BUILD_TIME/zhanggui_adhoc.ipa"
 
 #自动编译并且打包签名
-COMPILE_IPA_PATH="$SHELL_DIR/buildsetting.plist" #编译配置文件
+COMPILE_IPA_PATH="$SHELL_DIR/zhanggui-buildsetting.plist" #编译配置文件
 sh $SHELL_DIR/autobuildipa.sh $SOURCE_CODE_FOLDER $STORE_IPA_PATH $COMPILE_IPA_PATH $XCODE_BUILD_FOLDER
 
 #分目录
